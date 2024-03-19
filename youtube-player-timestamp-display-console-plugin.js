@@ -8,17 +8,45 @@ timestampTag.classList.add("timestamp");
 
 timestampTag.setAttribute(
     "style",
-    "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 2px; padding-bottom: 12px;"
+    "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 2px; padding-bottom: 5px;"
 );
 
 //To-do, add a form submission for section looping, jump to, and skip to timestamp location.
-//Create a form
 
-//test
+//Create a form
+const inputForm = document.createElement("form");
+inputForm.id = "timestamp-input-form";
+
+const timestampInputField = document.createElement("input");
+timestampInputField.type = "text";
+timestampInputField.id = "timestamp-input-field";
+timestampInputField.name = "timestamp";
+inputForm.appendChild(timestampInputField);
+
+const submitButton = document.createElement("button");
+submitButton.type = "submit";
+submitButton.textContent = "Confirm";
+inputForm.appendChild(submitButton);
+
+// Event listener for form submission
+inputForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get form data
+    const formData = new FormData(event.currentTarget);
+    const formDataObject = {};
+    formData.forEach(function (value, key) {
+        formDataObject[key] = value;
+    });
+
+    // Display form data
+    console.log(formDataObject);
+});
 
 //Append all elements created above
 mainDiv.appendChild(pluginDiv);
 pluginDiv.appendChild(timestampTag);
+pluginDiv.appendChild(inputForm);
 timestampTag.textContent = "initialized";
 
 //Declaration
