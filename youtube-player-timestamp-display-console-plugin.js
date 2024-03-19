@@ -1,3 +1,9 @@
+//Declaration
+ytplayer = document.getElementById("movie_player");
+
+let previousTimestamp = "";
+let currentTimestamp = "";
+
 // Init a p tag for displaying currentTimestamp under the video title.
 
 const mainDiv = document.querySelector("ytd-watch-metadata").querySelector("#title");
@@ -34,13 +40,22 @@ inputForm.addEventListener("submit", function (event) {
 
     // Get form data
     const formData = new FormData(event.currentTarget);
-    const formDataObject = {};
-    formData.forEach(function (value, key) {
-        formDataObject[key] = value;
-    });
+
+    //convert timestamp input to seconds
+    const toSecond = (hrs, min, sec) => hrs * 60 * 60 + min * 60 + sec;
+
+    timeString = formData.get("timestamp");
+    const [hours, minutes, seconds] = timeString.split(":");
+    console.log(`${hours}:${minutes}:${seconds}`);
+    console.log(toSecond(parseInt(hours), parseInt(minutes), parseInt(seconds)));
+    ytplayer.seekTo(toSecond(parseInt(hours), parseInt(minutes), parseInt(seconds)));
+    // const formDataObject = {};
+    // formData.forEach(function (value, key) {
+    //     formDataObject[key] = value;
+    // });
 
     // Display form data
-    console.log(formDataObject);
+    // console.log(formDataObject);
 });
 
 //Append all elements created above
@@ -48,12 +63,6 @@ mainDiv.appendChild(pluginDiv);
 pluginDiv.appendChild(timestampTag);
 pluginDiv.appendChild(inputForm);
 timestampTag.textContent = "initialized";
-
-//Declaration
-ytplayer = document.getElementById("movie_player");
-
-let previousTimestamp = "";
-let currentTimestamp = "";
 
 function getCurrentTimestamp(playHeadInSecond) {
     //Using Date Object to calculate the timestamp with the playhead second given by the ytplayer.
