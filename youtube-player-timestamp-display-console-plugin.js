@@ -14,6 +14,7 @@ timestampTag.setAttribute(
 //To-do, add a form submission for section looping, jump to, and skip to timestamp location.
 //Create a form
 
+//Append all elements created above
 mainDiv.appendChild(pluginDiv);
 pluginDiv.appendChild(timestampTag);
 timestampTag.textContent = "initialized";
