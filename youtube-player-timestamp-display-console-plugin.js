@@ -1,15 +1,19 @@
 // Init a p tag for displaying currentTimestamp under the video title.
 
 const mainDiv = document.querySelector("ytd-watch-metadata").querySelector("#title");
+const pluginDiv = document.createElement("div");
 const timestampTag = document.createElement("p");
+pluginDiv.classList.add("plugin-div");
+timestampTag.classList.add("timestamp");
 
 timestampTag.setAttribute(
     "style",
     "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 2px; padding-bottom: 12px;"
 );
 
+mainDiv.appendChild(pluginDiv);
+pluginDiv.appendChild(timestampTag);
 timestampTag.textContent = "initialized";
-mainDiv.appendChild(timestampTag);
 
 //Declaration
 ytplayer = document.getElementById("movie_player");
@@ -34,14 +38,17 @@ function getCurrentTimestamp(playHeadInSecond) {
     return timestamp;
 }
 
-//Update the timestamp every 10ms.
-const printTimestamp = setInterval(function () {
+//Update the timestamp
+const printTimestamp = () => {
     let playHeadSecond = ytplayer.getCurrentTime();
     currentTimestamp = getCurrentTimestamp(playHeadSecond);
     if (previousTimestamp !== currentTimestamp) {
-        // console.log(currentTimestamp);
-        //
+        // console.log(currentTimestamp)
         timestampTag.textContent = currentTimestamp;
         previousTimestamp = currentTimestamp;
     }
+};
+
+const mainLoop = setInterval(function () {
+    printTimestamp();
 }, 10);
