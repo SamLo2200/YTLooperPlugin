@@ -3,6 +3,51 @@ ytplayer = document.getElementById("movie_player");
 
 let previousTimestamp = "";
 let currentTimestamp = "";
+let playHeadSecond = 0;
+
+function toSecond(hours, minutes, seconds) {
+    return parseInt(hours) * 60 * 60 + parseInt(minutes) * 60 + parseInt(seconds);
+}
+
+class TimestringSplitter {
+    static single(timeString) {
+        //Requires deconstruction: [hours, minutes, seconds]
+        return timeString.split(":");
+    }
+
+    static range(timeString) {
+        const [pointA, pointB] = timeString.split("-");
+
+        const [pointAHours, pointAMinutes, pointASeconds] = TimestringSplitter.single(pointA);
+        const [pointBHours, pointBMinutes, pointBSeconds] = TimestringSplitter.single(pointB);
+
+        return [
+            {
+                hours: pointAHours,
+                minutes: pointAMinutes,
+                seconds: pointASeconds,
+            },
+            {
+                hours: pointBHours,
+                minutes: pointBMinutes,
+                seconds: pointBSeconds,
+            },
+        ];
+    }
+}
+
+function looper(timeStringInRange) {
+    let pointAInSeconds = 0;
+    let pointBInSeconds = 0;
+
+    const [pointATime, pointBTime] = TimestringSplitter.range(timeStringInRange);
+
+    pointAInSeconds = toSecond(pointATime.hours, pointATime.minutes, pointATime.seconds);
+    console.log(pointAInSeconds);
+
+    pointBInSeconds = toSecond(pointBTime.hours, pointBTime.minutes, pointBTime.seconds);
+    console.log(pointBInSeconds);
+}
 
 // Init a p tag for displaying currentTimestamp under the video title.
 
@@ -38,24 +83,31 @@ inputForm.appendChild(submitButton);
 inputForm.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
 
+    //A variable that derived from meeting condition, can be directSkip, looping, TimestampQuickSkip
+    let playingType = "";
+
     // Get form data
     const formData = new FormData(event.currentTarget);
+    let userInput = formData.get("timestamp");
 
-    //convert timestamp input to seconds
-    const toSecond = (hrs, min, sec) => hrs * 60 * 60 + min * 60 + sec;
+    if (userInput.length <= 8) {
+        playingType = "directSkip";
+        const [hours, minutes, seconds] = TimestringSplitter.single(userInput);
+        ytplayer.seekTo(toSecond(hours, minutes, seconds));
+    }
 
-    timeString = formData.get("timestamp");
-    const [hours, minutes, seconds] = timeString.split(":");
-    console.log(`${hours}:${minutes}:${seconds}`);
-    console.log(toSecond(parseInt(hours), parseInt(minutes), parseInt(seconds)));
-    ytplayer.seekTo(toSecond(parseInt(hours), parseInt(minutes), parseInt(seconds)));
-    // const formDataObject = {};
-    // formData.forEach(function (value, key) {
-    //     formDataObject[key] = value;
-    // });
+    if (userInput.length > 8) {
+        looper(userInput);
+    }
 
     // Display form data
-    // console.log(formDataObject);
+
+    const formDataObject = {};
+    formData.forEach(function (value, key) {
+        formDataObject[key] = value;
+    });
+
+    console.log(formDataObject);
 });
 
 //Append all elements created above
@@ -83,7 +135,7 @@ function getCurrentTimestamp(playHeadInSecond) {
 
 //Update the timestamp
 const printTimestamp = () => {
-    let playHeadSecond = ytplayer.getCurrentTime();
+    playHeadSecond = ytplayer.getCurrentTime();
     currentTimestamp = getCurrentTimestamp(playHeadSecond);
     if (previousTimestamp !== currentTimestamp) {
         // console.log(currentTimestamp)
