@@ -97,6 +97,7 @@ inputForm.addEventListener("submit", function (event) {
     }
 
     if (userInput.length > 8) {
+        playingType = "looping";
         looper(userInput);
     }
 
