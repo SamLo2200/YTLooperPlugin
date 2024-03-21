@@ -107,20 +107,25 @@ inputForm.addEventListener("submit", function (event) {
     const formData = new FormData(event.currentTarget);
     let userInput = formData.get("timestamp");
 
-    if ((isLooping = true)) {
+    if (isLooping === true) {
         isLooping = false;
-    }
+        submitButton.textContent = "Confirm";
+        console.log(isLooping);
+    } else {
+        if (userInput.length <= 8) {
+            playingType = "directSkip";
+            const [hours, minutes, seconds] = TimestringSplitter.single(userInput);
+            ytplayer.seekTo(toSecond(hours, minutes, seconds));
+        }
 
-    if (userInput.length <= 8) {
-        playingType = "directSkip";
-        const [hours, minutes, seconds] = TimestringSplitter.single(userInput);
-        ytplayer.seekTo(toSecond(hours, minutes, seconds));
-    }
+        if (userInput.length > 8 && isLooping !== true) {
+            console.log("hello world");
+            playingType = "looping";
+            isLooping = true;
+            looper(userInput);
 
-    if (userInput.length > 8) {
-        playingType = "looping";
-        isLooping = true;
-        looper(userInput);
+            submitButton.textContent = "Stop/Reset";
+        }
     }
 
     // Display form data
