@@ -5,6 +5,12 @@ let previousTimestamp = "";
 let currentTimestamp = "";
 let playHeadSecond = 0;
 
+//A variable that derived from meeting condition, can be directSkip, looping, TimestampQuickSkip
+let playingType = "";
+
+//Will determine whether the looper checking function will be executed
+let isLooping = false;
+
 function toSecond(hours, minutes, seconds) {
     return parseInt(hours) * 60 * 60 + parseInt(minutes) * 60 + parseInt(seconds);
 }
@@ -43,10 +49,26 @@ function looper(timeStringInRange) {
     const [pointATime, pointBTime] = TimestringSplitter.range(timeStringInRange);
 
     pointAInSeconds = toSecond(pointATime.hours, pointATime.minutes, pointATime.seconds);
-    console.log(pointAInSeconds);
-
     pointBInSeconds = toSecond(pointBTime.hours, pointBTime.minutes, pointBTime.seconds);
+
+    console.log(pointAInSeconds);
     console.log(pointBInSeconds);
+
+    const looping = setInterval(() => {
+        if (playHeadSecond <= pointAInSeconds) {
+            ytplayer.seekTo(pointAInSeconds);
+        }
+
+        if (playHeadSecond >= pointBInSeconds) {
+            ytplayer.seekTo(pointAInSeconds);
+        }
+
+        if (isLooping === false) {
+            clearInterval(looping);
+        }
+    }, 50);
+
+    //To do: Add a stop button to stop this looping
 }
 
 // Init a p tag for displaying currentTimestamp under the video title.
@@ -83,12 +105,13 @@ inputForm.appendChild(submitButton);
 inputForm.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
 
-    //A variable that derived from meeting condition, can be directSkip, looping, TimestampQuickSkip
-    let playingType = "";
-
     // Get form data
     const formData = new FormData(event.currentTarget);
     let userInput = formData.get("timestamp");
+
+    if ((isLooping = true)) {
+        isLooping = false;
+    }
 
     if (userInput.length <= 8) {
         playingType = "directSkip";
@@ -98,6 +121,7 @@ inputForm.addEventListener("submit", function (event) {
 
     if (userInput.length > 8) {
         playingType = "looping";
+        isLooping = true;
         looper(userInput);
     }
 
