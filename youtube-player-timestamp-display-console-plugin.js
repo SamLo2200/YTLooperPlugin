@@ -81,7 +81,7 @@ timestampTag.classList.add("timestamp");
 
 timestampTag.setAttribute(
     "style",
-    "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 2px; padding-bottom: 5px;"
+    "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 5px; padding-bottom: 5px;"
 );
 
 //Create a form
@@ -137,6 +137,11 @@ inputForm.addEventListener("submit", function (event) {
 
     console.log(formDataObject);
 });
+
+inputForm.setAttribute(
+    "style",
+    "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 0.2px; padding-bottom: 13px;"
+);
 
 //Append all elements created above
 mainDiv.appendChild(pluginDiv);
