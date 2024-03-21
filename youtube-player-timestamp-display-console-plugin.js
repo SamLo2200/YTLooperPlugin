@@ -84,8 +84,6 @@ timestampTag.setAttribute(
     "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 2px; padding-bottom: 5px;"
 );
 
-//To-do, add a form submission for section looping, jump to, and skip to timestamp location.
-
 //Create a form
 const inputForm = document.createElement("form");
 inputForm.id = "timestamp-input-form";
