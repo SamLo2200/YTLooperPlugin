@@ -81,7 +81,7 @@ timestampTag.classList.add("timestamp");
 
 timestampTag.setAttribute(
     "style",
-    "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 5px; padding-bottom: 5px;"
+    "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 6px; padding-bottom: 5px;"
 );
 
 //Create a form
