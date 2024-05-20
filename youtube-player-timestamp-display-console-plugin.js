@@ -199,7 +199,7 @@ const mainLoop = setInterval(function () {
 
 //Copy currentTimestamp to clipboard when Q is pressed
 document.addEventListener("keydown", function (event) {
-    if (event.key === "q" || event.key === "Q") {
+    if (event.key === "q") {
         navigator.clipboard.writeText(currentTimestamp);
     }
 });
