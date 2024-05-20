@@ -198,9 +198,16 @@ const mainLoop = setInterval(function () {
     printTimestamp();
 }, 10);
 
-//Copy currentTimestamp to clipboard when Q is pressed
+//Shortcuts
 document.addEventListener("keydown", function (event) {
+    //Copy currentTimestamp to clipboard when Q is pressed
     if (event.key === "q" || event.key === "Q" || event.key === "手") {
         navigator.clipboard.writeText(currentTimestamp);
+    }
+
+    //Select timestamp input field of the submission form
+    if (event.key === "w" || event.key === "W" || event.key === "田") {
+        event.preventDefault();
+        document.getElementById("timestamp-input-field").focus();
     }
 });
