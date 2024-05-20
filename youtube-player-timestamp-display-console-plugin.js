@@ -205,12 +205,21 @@ document.addEventListener("keydown", function (event) {
         navigator.clipboard.writeText(currentTimestamp);
     }
 
-    //Select timestamp input field of the submission form
+    //Select timestamp input field
     if (
         (event.key === "w" || event.key === "W" || event.key === "田") &&
         event.target.tagName !== "INPUT"
     ) {
         event.preventDefault();
         document.getElementById("timestamp-input-field").focus();
+    }
+
+    //Clear timestamp input field
+    if (
+        (event.key === "e" || event.key === "E" || event.key === "水") &&
+        event.target.tagName !== "INPUT"
+    ) {
+        event.preventDefault();
+        document.getElementById("timestamp-input-field").value = "";
     }
 });
