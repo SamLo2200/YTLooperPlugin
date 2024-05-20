@@ -222,4 +222,19 @@ document.addEventListener("keydown", function (event) {
         event.preventDefault();
         document.getElementById("timestamp-input-field").value = "";
     }
+
+    //Clear timestamp input field
+    if (
+        (event.key === "" || event.key === "E" || event.key === "水") &&
+        event.target.tagName !== "INPUT"
+    ) {
+        event.preventDefault();
+        document.getElementById("timestamp-input-field").value = "";
+    }
+
+    //Deselect timestamp input field
+    if (event.key === "Escape" || event.key === "Escape") {
+        event.preventDefault();
+        document.getElementById("timestamp-input-field").blur();
+    }
 });
