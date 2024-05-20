@@ -12,7 +12,9 @@ let playingType = "";
 let isLooping = false;
 
 function toSecond(hours, minutes, seconds) {
-    return parseInt(hours) * 60 * 60 + parseInt(minutes) * 60 + parseInt(seconds);
+    return (
+        parseInt(hours) * 60 * 60 + parseInt(minutes) * 60 + parseInt(seconds)
+    );
 }
 
 class TimestringSplitter {
@@ -24,8 +26,10 @@ class TimestringSplitter {
     static range(timeString) {
         const [pointA, pointB] = timeString.split("-");
 
-        const [pointAHours, pointAMinutes, pointASeconds] = TimestringSplitter.single(pointA);
-        const [pointBHours, pointBMinutes, pointBSeconds] = TimestringSplitter.single(pointB);
+        const [pointAHours, pointAMinutes, pointASeconds] =
+            TimestringSplitter.single(pointA);
+        const [pointBHours, pointBMinutes, pointBSeconds] =
+            TimestringSplitter.single(pointB);
 
         return [
             {
@@ -46,10 +50,19 @@ function looper(timeStringInRange) {
     let pointAInSeconds = 0;
     let pointBInSeconds = 0;
 
-    const [pointATime, pointBTime] = TimestringSplitter.range(timeStringInRange);
+    const [pointATime, pointBTime] =
+        TimestringSplitter.range(timeStringInRange);
 
-    pointAInSeconds = toSecond(pointATime.hours, pointATime.minutes, pointATime.seconds);
-    pointBInSeconds = toSecond(pointBTime.hours, pointBTime.minutes, pointBTime.seconds);
+    pointAInSeconds = toSecond(
+        pointATime.hours,
+        pointATime.minutes,
+        pointATime.seconds
+    );
+    pointBInSeconds = toSecond(
+        pointBTime.hours,
+        pointBTime.minutes,
+        pointBTime.seconds
+    );
 
     console.log(pointAInSeconds);
     console.log(pointBInSeconds);
@@ -73,7 +86,9 @@ function looper(timeStringInRange) {
 
 // Init a p tag for displaying currentTimestamp under the video title.
 
-const mainDiv = document.querySelector("ytd-watch-metadata").querySelector("#title");
+const mainDiv = document
+    .querySelector("ytd-watch-metadata")
+    .querySelector("#title");
 const pluginDiv = document.createElement("div");
 const timestampTag = document.createElement("p");
 pluginDiv.classList.add("plugin-div");
@@ -114,7 +129,8 @@ inputForm.addEventListener("submit", function (event) {
     } else {
         if (userInput.length <= 8) {
             playingType = "directSkip";
-            const [hours, minutes, seconds] = TimestringSplitter.single(userInput);
+            const [hours, minutes, seconds] =
+                TimestringSplitter.single(userInput);
             ytplayer.seekTo(toSecond(hours, minutes, seconds));
         }
 
@@ -180,3 +196,10 @@ const printTimestamp = () => {
 const mainLoop = setInterval(function () {
     printTimestamp();
 }, 10);
+
+//Copy currentTimestamp to clipboard when Q is pressed
+document.addEventListener("keydown", function (event) {
+    if (event.key === "q" || event.key === "Q") {
+        navigator.clipboard.writeText(currentTimestamp);
+    }
+});
