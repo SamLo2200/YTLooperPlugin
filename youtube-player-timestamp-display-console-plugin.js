@@ -117,6 +117,7 @@ inputForm.appendChild(submitButton);
 // Event listener for form submission
 inputForm.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
+    document.getElementById("timestamp-input-field").blur(); //Remove focus from the input field
 
     // Get form data
     const formData = new FormData(event.currentTarget);
