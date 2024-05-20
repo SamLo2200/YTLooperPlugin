@@ -206,7 +206,10 @@ document.addEventListener("keydown", function (event) {
     }
 
     //Select timestamp input field of the submission form
-    if (event.key === "w" || event.key === "W" || event.key === "田") {
+    if (
+        (event.key === "w" || event.key === "W" || event.key === "田") &&
+        event.target.tagName !== "INPUT"
+    ) {
         event.preventDefault();
         document.getElementById("timestamp-input-field").focus();
     }
