@@ -174,7 +174,7 @@ function getCurrentTimestamp(playHeadInSecond) {
     seconds = timestampObj.getSeconds();
 
     timestamp =
-        hours.toString().padStart(2, "0") +
+        hours.toString() +
         ":" +
         minutes.toString().padStart(2, "0") +
         ":" +
