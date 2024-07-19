@@ -12,8 +12,8 @@ When pressing the `Q` button, the plugin will copy the current playhead timestam
 2. Copy this `youtube-player-timestamp-display-console-plugin.js` code and paste it inside the console
 3. Enjoy this plugin
 
-> ### Additional notes:
->
+### Additional notes:
+
 > If you never paste any code inside the console, the browser will give you the following warning:
 >
 > `Warning: Don’t paste code into the DevTools Console that you don’t understand or haven’t reviewed yourself. This could allow attackers to steal your identity or take control of your computer. Please type ‘allow pasting’ below and hit Enter to allow pasting.`
