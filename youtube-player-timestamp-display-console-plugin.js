@@ -35,18 +35,37 @@ class TimestringSplitter {
 }
 
 function looper(timeStringInRange) {
-    let pointAInSeconds = 0;
-    let pointBInSeconds = 0;
+    let playlistArray = [];
 
-    const [pointATime, pointBTime] = TimestringSplitter.range(timeStringInRange);
+    // Parse multiple inputs and add each timestamp pair to playlistArray as an object
+    timeStringInRange.split(",").forEach(playlistItemTS => {
+        const [pointATime, pointBTime] = TimestringSplitter.range(playlistItemTS);
 
-    pointAInSeconds = toSecond(pointATime.hours, pointATime.minutes, pointATime.seconds);
-    pointBInSeconds = toSecond(pointBTime.hours, pointBTime.minutes, pointBTime.seconds);
+        // Convert returned timestamp to seconds
+        let pointAInSeconds = toSecond(pointATime.hours, pointATime.minutes, pointATime.seconds);
+        let pointBInSeconds = toSecond(pointBTime.hours, pointBTime.minutes, pointBTime.seconds);
 
-    console.log(pointAInSeconds);
-    console.log(pointBInSeconds);
+        // Push the total seconds to the array as an record
+        playlistArray.push({pointAInSeconds: pointAInSeconds, pointBInSeconds: pointBInSeconds});
+    });
+
+    console.log(playlistArray);
 
     const looping = setInterval(() => {
+
+        // Two cases:
+        // 1. If the player head hit the end of pointBInSecond !== end of the playlist => next record timestamp A
+        // 2. If the player head hit the end of pointBInSecond + end of the playlist => first record timestamp A
+
+        for (let i = 0; i < playlistArray.length; i++) {
+            const pointAInSeconds = playlistArray[i].pointAInSeconds;
+            const pointBInSeconds = playlistArray[i].pointBInSeconds;
+
+            if (playHeadSecond <= pointAInSeconds) {
+                ytplayer.seekTo(pointAInSeconds);
+            }
+        }
+
         if (playHeadSecond <= pointAInSeconds) {
             ytplayer.seekTo(pointAInSeconds);
         }
@@ -55,6 +74,7 @@ function looper(timeStringInRange) {
             ytplayer.seekTo(pointAInSeconds);
         }
 
+        // Execute clearInterval when the stop button is clicked
         if (isLooping === false) {
             clearInterval(looping);
         }
@@ -111,7 +131,6 @@ inputForm.addEventListener("submit", function (event) {
         }
 
         if (userInput.length > 8 && isLooping !== true) {
-            console.log("hello world");
             playingType = "looping";
             isLooping = true;
             looper(userInput);

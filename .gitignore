@@ -3,6 +3,8 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+/package.json
+
 
 # testing
 /coverage
