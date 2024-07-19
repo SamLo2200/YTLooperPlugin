@@ -43,7 +43,9 @@ This console plugin will not collect any information or connect to any server.
 ## Tested Browser
 
 This script works in various browsers, including Safari, Chrome, Firefox, and Microsoft Edge.
-***
+
+<br/>
+
 # Youtube Looper 瀏覽器控制台插件
 
 這是一個瀏覽器控制台腳本，可以在視頻標題下生成一個輸入框。您可以插入一個時間戳，例如 `1:00:11`，直接跳轉到該時間點。
@@ -52,7 +54,7 @@ This script works in various browsers, including Safari, Chrome, Firefox, and Mi
 
 您還可以通過用逗號分隔每對時間戳來創建多個時間戳對，以按順序循環播放作為播放列表，例如 `0:01:00 - 0:01:12, 0:05:32 - 0:05:35`。
 
-按下 `Q` 鍵時，插件將將當前播放頭的時間戳複製到計算機的剪貼板中。
+按下 `Q` 鍵時，插件將將當前播放頭的時間戳複製到電腦的剪貼板中。
 
 ## 用法
 
@@ -62,9 +64,9 @@ This script works in various browsers, including Safari, Chrome, Firefox, and Mi
 
 ### 附加說明：
 
-> 如果您從未在控制台中粘貼任何代碼，瀏覽器將給您以下警告：
+> 如果您從未在控制台中粘貼任何代碼，瀏覽器將給您以下警告 （不同地區的中文或會影響以下警告的用字，請跟據瀏覽器指示操作）：
 >
-> `警告：不要將您不了解或未經審查的代碼粘貼到開發者工具控制台中。這可能允許攻擊者竊取您的身份或控制您的計算機。請在下方輸入“允許粘貼”並按 Enter 以允許粘貼。`
+> `警告：不要將您不了解或未經審查的代碼粘貼到開發者工具控制台中。這可能允許攻擊者竊取您的身份或控制您的電腦。請在下方輸入“允許粘貼”並按 Enter 以允許粘貼。`
 >
 > 若要進行粘貼，您必須手動輸入“允許粘貼”，然後按下 `enter`。
 
@@ -81,6 +83,7 @@ This script works in various browsers, including Safari, Chrome, Firefox, and Mi
 -   `Esc`：取消焦點於輸入字段
 
 把時間戳插入到YouTube視頻標題下的輸入框後，按下 `Enter` 鍵以確認時間戳。
+
 ## 隱私
 
 此控制台插件不會收集任何信息或連接到任何服務器。
