@@ -9,7 +9,7 @@ When pressing the `Q` button, the plugin will copy the current playhead timestam
 ## Usage
 
 1. Open the browser console
-2. Copy this code and paste it inside the console
+2. Copy this `youtube-player-timestamp-display-console-plugin.js` code and paste it inside the console
 3. Enjoy this plugin
 
 > ### Additional notes:
