@@ -4,7 +4,7 @@ This is a browser console script that generate a input box under the video title
 
 It also allows looping between timestamps, eg `0:11:00 - 0:12:00`, when youtube player head hit `0:12:00`, it will go back to `0:11:00` to replay again until you hit the stop button.
 
-You can also have multiple pairs of timestamps by separating each pair by a comma to loop in order as a playlist, eg `0:01:00 - 0:01:12, 0:05:32 - 0:05:35`.
+You can also have multiple pairs of timestamps by separating each pair by a comma to loop in order as a playlist, eg `0:01:00 - 0:01:12, 0:05:32 - 0:05:35`. If there is only one set of timestamps, such as 0:01:00 - 0:01:12, there is no need to include a comma at the end.
 
 When pressing the `Q` button, the plugin will copy the current playhead timestamp to the computer clipboard
 
@@ -52,7 +52,7 @@ This script works in various browsers, including Safari, Chrome, Firefox, and Mi
 
 它還允許在時間戳之間循環播放，例如 `0:11:00 - 0:12:00`，當 YouTube 播放器達到 `0:12:00` 時，它會返回到 `0:11:00` 重新播放，直到您按下Stop。
 
-您還可以通過用逗號分隔每對時間戳來創建多個時間戳對，以按順序循環播放作為播放列表，例如 `0:01:00 - 0:01:12, 0:05:32 - 0:05:35`。
+您還可以通過用逗號分隔每對時間戳來創建多個時間戳對，以按順序循環播放作為播放列表，例如 `0:01:00 - 0:01:12, 0:05:32 - 0:05:35`。如果只有一組timestamps, eg `0:01:00 - 0:01:12` 則無需輸入逗號。
 
 按下 `Q` 鍵時，插件將將當前播放頭的時間戳複製到電腦的剪貼板中。
 
