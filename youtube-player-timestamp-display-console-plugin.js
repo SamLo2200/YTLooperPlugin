@@ -200,15 +200,21 @@ const mainLoop = setInterval(function () {
 
 //Shortcuts
 document.addEventListener("keydown", function (event) {
+    // Define focused HTML elements to ignore
+    const formElements = ["INPUT", "TEXTAREA", "SELECT", "OPTION", "DIV"];
+
     //Copy currentTimestamp to clipboard when Q is pressed
-    if (event.key === "q" || event.key === "Q" || event.key === "手") {
+    if (
+        (event.key === "q" || event.key === "Q" || event.key === "手") &&
+        !formElements.includes(event.target.tagName)
+    ) {
         navigator.clipboard.writeText(currentTimestamp);
     }
 
     //Select timestamp input field
     if (
         (event.key === "w" || event.key === "W" || event.key === "田") &&
-        event.target.tagName !== "INPUT"
+        !formElements.includes(event.target.tagName)
     ) {
         event.preventDefault();
         document.getElementById("timestamp-input-field").focus();
@@ -217,7 +223,7 @@ document.addEventListener("keydown", function (event) {
     //Clear timestamp input field
     if (
         (event.key === "e" || event.key === "E" || event.key === "水") &&
-        event.target.tagName !== "INPUT"
+        !formElements.includes(event.target.tagName)
     ) {
         event.preventDefault();
         document.getElementById("timestamp-input-field").value = "";
