@@ -43,7 +43,7 @@ function looper(timeStringInRange) {
   let isInitial = true;
 
   // Parse multiple inputs that seperated by comma and add each timestamp pair to playlistArray as an object
-  timeStringInRange.split(",").forEach((playlistItemTS) => {
+  timeStringInRange.split(/[,，]/).forEach((playlistItemTS) => {
     const [pointATime, pointBTime] = TimestringSplitter.range(playlistItemTS);
 
     // Convert returned timestamp to seconds
