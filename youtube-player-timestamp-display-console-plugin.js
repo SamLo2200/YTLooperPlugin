@@ -43,27 +43,30 @@ function looper(timeStringInRange) {
   let isInitial = true;
 
   // Parse multiple inputs that seperated by comma and add each timestamp pair to playlistArray as an object
-  timeStringInRange.split(/[,，]/).forEach((playlistItemTS) => {
-    const [pointATime, pointBTime] = TimestringSplitter.range(playlistItemTS);
+  timeStringInRange
+    .split(/[,，]/)
+    .filter((item) => item.trim() !== "")
+    .forEach((playlistItemTS) => {
+      const [pointATime, pointBTime] = TimestringSplitter.range(playlistItemTS);
 
-    // Convert returned timestamp to seconds
-    let pointAInSeconds = toSecond(
-      pointATime.hours,
-      pointATime.minutes,
-      pointATime.seconds,
-    );
-    let pointBInSeconds = toSecond(
-      pointBTime.hours,
-      pointBTime.minutes,
-      pointBTime.seconds,
-    );
+      // Convert returned timestamp to seconds
+      let pointAInSeconds = toSecond(
+        pointATime.hours,
+        pointATime.minutes,
+        pointATime.seconds,
+      );
+      let pointBInSeconds = toSecond(
+        pointBTime.hours,
+        pointBTime.minutes,
+        pointBTime.seconds,
+      );
 
-    // Push the total seconds to the array as an record
-    playlistArray.push({
-      pointAInSeconds: pointAInSeconds,
-      pointBInSeconds: pointBInSeconds,
+      // Push the total seconds to the array as an record
+      playlistArray.push({
+        pointAInSeconds: pointAInSeconds,
+        pointBInSeconds: pointBInSeconds,
+      });
     });
-  });
 
   console.log(playlistArray);
 
