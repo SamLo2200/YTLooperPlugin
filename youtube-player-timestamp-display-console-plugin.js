@@ -40,6 +40,8 @@ function looper(timeStringInRange) {
   let playlistArray = [];
   let playlistIndex = 0;
 
+  let isInitial = true;
+
   // Parse multiple inputs that seperated by comma and add each timestamp pair to playlistArray as an object
   timeStringInRange.split(",").forEach((playlistItemTS) => {
     const [pointATime, pointBTime] = TimestringSplitter.range(playlistItemTS);
@@ -74,6 +76,9 @@ function looper(timeStringInRange) {
     ) {
       playlistIndex += 1;
       ytplayer.seekTo(playlistArray[playlistIndex].pointAInSeconds);
+
+      // Refresh the playHeadSecond variable
+      playHeadSecond = ytplayer.getCurrentTime();
     }
 
     // If the playhead hits pointBInSeconds + the record is the last in the arraylist: Go to the beginning of the array
@@ -83,12 +88,24 @@ function looper(timeStringInRange) {
     ) {
       playlistIndex = 0;
       ytplayer.seekTo(playlistArray[playlistIndex].pointAInSeconds);
+
+      // Refresh the playHeadSecond variable
+      playHeadSecond = ytplayer.getCurrentTime();
     }
 
     // Skip to the first timestamp when clicking the start button
-    if (playHeadSecond <= playlistArray[0].pointAInSeconds) {
+    if (
+      playHeadSecond <= playlistArray[0].pointAInSeconds &&
+      isInitial === true
+    ) {
       playlistIndex = 0;
       ytplayer.seekTo(playlistArray[playlistIndex].pointAInSeconds);
+
+      // Refresh the playHeadSecond variable
+      playHeadSecond = ytplayer.getCurrentTime();
+
+      // Prevent racing condition
+      isInitial = false;
     }
 
     // Execute clearInterval when the stop button is clicked
