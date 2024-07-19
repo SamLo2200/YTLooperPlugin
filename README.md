@@ -4,6 +4,8 @@ This is a browser console script that generate a input box under the video title
 
 It also allows looping between timestamps, eg `0:11:00 - 0:12:00`, when youtube player head hit `0:12:00`, it will go back to `0:11:00` to replay again until you hit the stop button.
 
+You can also have multiple pairs of timestamps by separating each pair by a comma to loop in order as a playlist, eg `0:01:00 - 0:01:12, 0:05:32 - 0:05:35`.
+
 When pressing the `Q` button, the plugin will copy the current playhead timestamp to the computer clipboard
 
 ## Usage
