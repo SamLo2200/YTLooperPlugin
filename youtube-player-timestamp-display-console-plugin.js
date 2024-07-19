@@ -27,11 +27,10 @@ class TimestringSplitter {
         const [pointAHours, pointAMinutes, pointASeconds] = TimestringSplitter.single(pointA);
         const [pointBHours, pointBMinutes, pointBSeconds] = TimestringSplitter.single(pointB);
 
-        return [{
-            hours: pointAHours, minutes: pointAMinutes, seconds: pointASeconds,
-        }, {
-            hours: pointBHours, minutes: pointBMinutes, seconds: pointBSeconds,
-        },];
+        return [
+            {hours: pointAHours, minutes: pointAMinutes, seconds: pointASeconds,},
+            {hours: pointBHours, minutes: pointBMinutes, seconds: pointBSeconds,},
+        ];
     }
 }
 
