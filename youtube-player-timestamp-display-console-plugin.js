@@ -12,9 +12,7 @@ let playingType = "";
 let isLooping = false;
 
 function toSecond(hours, minutes, seconds) {
-    return (
-        parseInt(hours) * 60 * 60 + parseInt(minutes) * 60 + parseInt(seconds)
-    );
+    return (parseInt(hours) * 60 * 60 + parseInt(minutes) * 60 + parseInt(seconds));
 }
 
 class TimestringSplitter {
@@ -26,23 +24,14 @@ class TimestringSplitter {
     static range(timeString) {
         const [pointA, pointB] = timeString.split("-");
 
-        const [pointAHours, pointAMinutes, pointASeconds] =
-            TimestringSplitter.single(pointA);
-        const [pointBHours, pointBMinutes, pointBSeconds] =
-            TimestringSplitter.single(pointB);
+        const [pointAHours, pointAMinutes, pointASeconds] = TimestringSplitter.single(pointA);
+        const [pointBHours, pointBMinutes, pointBSeconds] = TimestringSplitter.single(pointB);
 
-        return [
-            {
-                hours: pointAHours,
-                minutes: pointAMinutes,
-                seconds: pointASeconds,
-            },
-            {
-                hours: pointBHours,
-                minutes: pointBMinutes,
-                seconds: pointBSeconds,
-            },
-        ];
+        return [{
+            hours: pointAHours, minutes: pointAMinutes, seconds: pointASeconds,
+        }, {
+            hours: pointBHours, minutes: pointBMinutes, seconds: pointBSeconds,
+        },];
     }
 }
 
@@ -50,19 +39,10 @@ function looper(timeStringInRange) {
     let pointAInSeconds = 0;
     let pointBInSeconds = 0;
 
-    const [pointATime, pointBTime] =
-        TimestringSplitter.range(timeStringInRange);
+    const [pointATime, pointBTime] = TimestringSplitter.range(timeStringInRange);
 
-    pointAInSeconds = toSecond(
-        pointATime.hours,
-        pointATime.minutes,
-        pointATime.seconds
-    );
-    pointBInSeconds = toSecond(
-        pointBTime.hours,
-        pointBTime.minutes,
-        pointBTime.seconds
-    );
+    pointAInSeconds = toSecond(pointATime.hours, pointATime.minutes, pointATime.seconds);
+    pointBInSeconds = toSecond(pointBTime.hours, pointBTime.minutes, pointBTime.seconds);
 
     console.log(pointAInSeconds);
     console.log(pointBInSeconds);
@@ -94,10 +74,7 @@ const timestampTag = document.createElement("p");
 pluginDiv.classList.add("plugin-div");
 timestampTag.classList.add("timestamp");
 
-timestampTag.setAttribute(
-    "style",
-    "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 6px; padding-bottom: 5px;"
-);
+timestampTag.setAttribute("style", "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 6px; padding-bottom: 5px;");
 
 //Create a form
 const inputForm = document.createElement("form");
@@ -130,8 +107,7 @@ inputForm.addEventListener("submit", function (event) {
     } else {
         if (userInput.length <= 8) {
             playingType = "directSkip";
-            const [hours, minutes, seconds] =
-                TimestringSplitter.single(userInput);
+            const [hours, minutes, seconds] = TimestringSplitter.single(userInput);
             ytplayer.seekTo(toSecond(hours, minutes, seconds));
         }
 
@@ -155,10 +131,7 @@ inputForm.addEventListener("submit", function (event) {
     console.log(formDataObject);
 });
 
-inputForm.setAttribute(
-    "style",
-    "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 0.2px; padding-bottom: 13px;"
-);
+inputForm.setAttribute("style", "font-family: 'Roboto', 'Arial', sans-serif; font-size: 1.53rem; padding-top: 0.2px; padding-bottom: 13px;");
 
 //Append all elements created above
 mainDiv.appendChild(pluginDiv);
@@ -173,12 +146,7 @@ function getCurrentTimestamp(playHeadInSecond) {
     minutes = timestampObj.getUTCMinutes();
     seconds = timestampObj.getSeconds();
 
-    timestamp =
-        hours.toString() +
-        ":" +
-        minutes.toString().padStart(2, "0") +
-        ":" +
-        seconds.toString().padStart(2, "0");
+    timestamp = hours.toString() + ":" + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0");
 
     return timestamp;
 }
@@ -204,27 +172,18 @@ document.addEventListener("keydown", function (event) {
     const formElements = ["INPUT", "TEXTAREA", "SELECT", "OPTION", "DIV"];
 
     //Copy currentTimestamp to clipboard when Q is pressed
-    if (
-        (event.key === "q" || event.key === "Q" || event.key === "手") &&
-        !formElements.includes(event.target.tagName)
-    ) {
+    if ((event.key === "q" || event.key === "Q" || event.key === "手") && !formElements.includes(event.target.tagName)) {
         navigator.clipboard.writeText(currentTimestamp);
     }
 
     //Select timestamp input field
-    if (
-        (event.key === "w" || event.key === "W" || event.key === "田") &&
-        !formElements.includes(event.target.tagName)
-    ) {
+    if ((event.key === "w" || event.key === "W" || event.key === "田") && !formElements.includes(event.target.tagName)) {
         event.preventDefault();
         document.getElementById("timestamp-input-field").focus();
     }
 
     //Clear timestamp input field
-    if (
-        (event.key === "e" || event.key === "E" || event.key === "水") &&
-        !formElements.includes(event.target.tagName)
-    ) {
+    if ((event.key === "e" || event.key === "E" || event.key === "水") && !formElements.includes(event.target.tagName)) {
         event.preventDefault();
         document.getElementById("timestamp-input-field").value = "";
     }
