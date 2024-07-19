@@ -10,7 +10,7 @@ When pressing the `Q` button, the plugin will copy the current playhead timestam
 
 ## Usage
 
-1. Open the browser console (F12)
+1. Open the browser console (F12 > Console)
 2. Copy this `youtube-player-timestamp-display-console-plugin.js` code and paste it inside the console
 3. Enjoy this plugin
 
@@ -58,7 +58,7 @@ This script works in various browsers, including Safari, Chrome, Firefox, and Mi
 
 ## 用法
 
-1. 打開瀏覽器控制台 (F12)
+1. 打開瀏覽器控制台 (F12 > 控制台)
 2. 將此 `youtube-player-timestamp-display-console-plugin.js` 代碼複製並粘貼到控制台內
 3. 享受這個插件
 
